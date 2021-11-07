@@ -8,7 +8,7 @@ class Develop extends Phaser.Scene{
     }
     
     create(){
-        this.add.text(20,20, "Photo Development scene, Press s to switch scene.");
+        this.add.text(20,20, "Photo Development mini-game, Press s to switch.");
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     }
 

@@ -4,11 +4,16 @@ class Photo extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image("Pacer", "./assetsPhotoGame");
+        this.load.image("Pacer", "./assetsPhotoGame/clientPacing.png");
     }
 
     create(){
-        this.add.text(20,20, "Photo scene, Press s to switch scene."); // debugging purposes, remove this later
+        this.cameras.main.setBackgroundColor("#EEEEEE");
+        let textConfig = {
+            color: '#000000'
+        };
+
+        this.add.text(20,20, "Photo minigame , Press s to switch.", textConfig); // debugging purposes, remove this later
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         // 📸 area setup
         this.photoZone = this.add.zone(game.config.width*.31,0).setSize(250,275).setOrigin(0,0);
