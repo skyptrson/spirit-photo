@@ -5,6 +5,7 @@ class Photo extends Phaser.Scene{
 
     preload(){
         this.load.image("Pacer", "./assetsPhotoGame/clientPacing.png");
+        this.load.image("Cam", "./assetsPhotoGame/camera.png");
     }
 
     create(){
