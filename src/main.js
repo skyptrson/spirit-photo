@@ -5,6 +5,7 @@ let config = {
     height: 480,
     scene: [Ectoplasm, Photo, Develop],
     // zoom: 1.5,
+    debug: true,
     physics:{
         default: 'arcade',
         arcade:{
@@ -13,3 +14,4 @@ let config = {
     }
 }
 let game = new Phaser.Game(config);
+let keyS;
