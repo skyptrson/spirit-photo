@@ -6,6 +6,7 @@ class Photo extends Phaser.Scene{
     preload(){
         this.load.image("Pacer", "./assetsPhotoGame/clientPacing.png");
         this.load.image("Cam", "./assetsPhotoGame/camera.png");
+        this.load.image("square", "./assets/square.PNG");
     }
 
     create(){
@@ -14,30 +15,54 @@ class Photo extends Phaser.Scene{
             color: '#000000'
         };
 
-        this.add.text(20,20, "Photo minigame , Press s to switch.", textConfig); // debugging purposes, remove this later
+        this.add.text(20,20, "Press s to switch.", textConfig); // debugging purposes, remove this later
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+
         // 📸 area setup
         this.photoZone = this.add.zone(game.config.width*.31,0).setSize(250,275).setOrigin(0,0);
         this.physics.world.enable(this.photoZone);
         this.photoZone.body.moves = false;
 
-        this.photoCorrect = false;
-
-        // set up button, on click, check if man overlaps photozone
-
-        // set up moving man
+       // 🚶‍♂️set up
         this.man = new Mover(this, 25, game.config.width/3);
+        
+        // 📷 setup
+        this.cam = this.add.sprite(game.config.width/3, game.config.height *.70, 'Cam');
+        this.cam.setScale(.1);
 
-
-        this.physics.add.overlap(this.man,this.photoZone, ()=>{
-            console.log("overlapped.");
+        // 📸 👆 button set up
+        this.camButton = this.physics.add.sprite(game.config.width*.48, 350);
+        this.camButton.fade = 1;
+        this.camButton.setInteractive({
+            useHandCursor: true
         });
+        this.photoCorrect = false;
+        this.clicked = false;
+
+        
+        // check if man is in photo
+        this.physics.add.overlap(this.man,this.photoZone, ()=>{
+            this.photoCorrect = true;
+        });
+        // check if photo was taken
+        this.input.on('gameobjectdown', (pointer, gameObject, event) =>{
+            this.clicked = true;
+        })
+
     }
     update(){
-        // this.photoZone.debugBodyColor = this.photoZone.body.touching.none ? 0x00ffff : 0xffff00;
+        if(this.photoCorrect && this.clicked){
+            console.log("Succesful photo!");
+        }
+        else if(this.clicked){
+            console.log("Bad photo.");
+        }
+
         if(Phaser.Input.Keyboard.JustDown(keyS)){
             this.scene.start('Develop');
         }
         this.man.update();
+        this.photoCorrect = false;
+        this.clicked = false;
     }
 }
