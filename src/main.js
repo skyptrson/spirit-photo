@@ -3,7 +3,7 @@ let config = {
     type: Phaser.WEBGL,
     width: 640,
     height: 480,
-    scene: [Ectoplasm, Photo, Develop],
+    scene: [Menu, Ectoplasm, Photo, Develop],
     // zoom: 1.5,
     debug: true,
     physics:{
@@ -14,4 +14,4 @@ let config = {
     }
 }
 let game = new Phaser.Game(config);
-let keyS;
+let keyS, keySpace;

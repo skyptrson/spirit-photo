@@ -20,7 +20,7 @@ class Photo extends Phaser.Scene{
             backgroundColor: '#FFFFFF'
         };
 
-        this.add.text(20,20, "Press s to switch.", this.textConfig); // debugging purposes, remove this later
+        this.add.text(20,20, "Click on the camera trigger to take a photo\nwhen the client is in range of the camera.\nPress s to switch games.", this.textConfig); // debugging purposes, remove this later
 
         // ⌨ setup
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -61,6 +61,7 @@ class Photo extends Phaser.Scene{
         // photo taking check
         if(this.photoCorrect && this.clicked){
             this.add.text(game.config.width/2,game.config.height/2, "Succesful photo!", this.textConfig).setOrigin(0.5, 0.5);
+            this.man.moveSpeed = 0;
             this.time.delayedCall(2000, ()=>{
                 this.scene.start('Develop');
             })
