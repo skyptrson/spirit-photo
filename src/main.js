@@ -5,7 +5,7 @@ let config = {
     height: 480,
     scene: [Menu, Ectoplasm, Photo, Develop],
     // zoom: 1.5,
-    debug: true,
+    debug: false,
     physics:{
         default: 'arcade',
         arcade:{

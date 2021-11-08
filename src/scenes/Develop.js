@@ -20,7 +20,7 @@ class Develop extends Phaser.Scene{
     this.add.text(15,35, "Drag The Ghost Portrait Into The Correct Position!");
     this.add.text(15,55, "Press s to switch.");
     this.invisible = this.add.sprite(game.config.width/1.38, game.config.height/2, 'Invisible').setScale(.5)
-    this.invisible.setVisible(true)
+    this.invisible.setVisible(false)
     // Draggable Ghost
     this.ghost = this.add.sprite(game.config.width, game.config.height *.50, 'Ghost').setScale(.05);
     this.ghost.inputEnabled = true;
