@@ -5,7 +5,7 @@ class Ectoplasm extends Phaser.Scene{
 
     preload(){
         this.load.image("Assistant", "./assetsEctoplasm/assistantMouthEmpty.png");
-        this.load.image("Blank Jar", "./assetsEctoplasmFIXED/blankJar.png");
+        this.load.image("Blank Jar", "./assetsEctoplasmFIXED/jar0.png");
         this.load.image("First Gauze", "./assetsEctoplasmFIXED/gauze1.png");
         this.load.image("Second Gauze", "./assetsEctoplasmFIXED/gauze2.png");
         this.load.image("Third Gauze", "./assetsEctoplasmFIXED/gauze3.png");
