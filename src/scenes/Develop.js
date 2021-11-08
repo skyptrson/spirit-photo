@@ -8,7 +8,9 @@ class Develop extends Phaser.Scene{
         this.load.image("Ghost", "./assetsExposureGame/ghost.png");
         this.load.image("AssistWrong", "./assetsExposureGame/wrongPictureAssisstant.png");
         this.load.image("ChickenWrong", "./assetsExposureGame/wrongPictureChicken.png");
-
+        this.load.image("UniGhostLife", "./UniversialAssets/ghostLife.png")
+        this.load.image("UniTimerBar", "./UniversialAssets/timerBar.png")
+        this.load.image("UniTimerEmpty", "./UniversialAssets/timerEmpty.png")
     }
     
     create(){
