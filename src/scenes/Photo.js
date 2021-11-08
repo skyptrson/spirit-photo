@@ -7,6 +7,9 @@ class Photo extends Phaser.Scene{
         this.load.image("Pacer", "./assetsPhotoGame/clientPacing.png");
         this.load.image("Cam", "./assetsPhotoGame/camera.png");
         this.load.image("square", "./assets/square.PNG");
+        this.load.image("UniGhostLife", "./UniversialAssets/ghostLife.png")
+        this.load.image("UniTimerBar", "./UniversialAssets/timerBar.png")
+        this.load.image("UniTimerEmpty", "./UniversialAssets/timerEmpty.png")
     }
 
     create(){
