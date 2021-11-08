@@ -11,11 +11,14 @@ class Photo extends Phaser.Scene{
 
     create(){
         this.cameras.main.setBackgroundColor("#EEEEEE");
-        let textConfig = {
-            color: '#000000'
+        this.textConfig = {
+            color: '#000000',
+            backgroundColor: '#FFFFFF'
         };
 
-        this.add.text(20,20, "Press s to switch.", textConfig); // debugging purposes, remove this later
+        this.add.text(20,20, "Press s to switch.", this.textConfig); // debugging purposes, remove this later
+
+        // ⌨ setup
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 
         // 📸 area setup
@@ -27,8 +30,7 @@ class Photo extends Phaser.Scene{
         this.man = new Mover(this, 25, game.config.width/3);
         
         // 📷 setup
-        this.cam = this.add.sprite(game.config.width/3, game.config.height *.70, 'Cam');
-        this.cam.setScale(.1);
+        this.cam = this.add.sprite(game.config.width/3, game.config.height *.70, 'Cam').setScale(.1);
 
         // 📸 👆 button set up
         this.camButton = this.physics.add.sprite(game.config.width*.48, 350);
@@ -47,20 +49,36 @@ class Photo extends Phaser.Scene{
         // check if photo was taken
         this.input.on('gameobjectdown', (pointer, gameObject, event) =>{
             this.clicked = true;
+        });
+
+        // ⌚
+        this.clock = this.time.delayedCall(10000, () =>{
+            //
+            console.log("Game over.");
+            this.scene.start('Develop');
         })
 
     }
     update(){
+        // photo taking check
         if(this.photoCorrect && this.clicked){
-            console.log("Succesful photo!");
+            this.add.text(game.config.width/2,game.config.height/2, "Succesful photo!", this.textConfig).setOrigin(0.5, 0.5);
+            this.time.delayedCall(4000, ()=>{
+                this.scene.start('Develop');
+            })
         }
         else if(this.clicked){
-            console.log("Bad photo.");
+            this.incorrect = this.add.text(game.config.width/2,game.config.height/2, "Bad photo.", this.textConfig).setOrigin(0.5, 0.5);
+            this.time.delayedCall(2000, ()=>{
+                this.incorrect.destroy();
+            });
         }
 
+        // change scene
         if(Phaser.Input.Keyboard.JustDown(keyS)){
             this.scene.start('Develop');
         }
+        // updates to keep scene running
         this.man.update();
         this.photoCorrect = false;
         this.clicked = false;
