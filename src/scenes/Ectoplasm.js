@@ -31,19 +31,26 @@ class Ectoplasm extends Phaser.Scene{
             color: '#000000',
             backgroundColor: '#FFFFFF'
         };
-        this.add.text(20,20, "Ectoplasm minigame, Press s to switch.", this.textConfig);
+        this.add.text(20,20, "Click on the jar,\n then place each roll in the mouth.\n Press s to switch.", this.textConfig);
         
         // 🥛 jar(s) set up
         this.jar = this.physics.add.sprite(game.config.width*.85, game.config.height*.75, 'Fifth Jar').setScale(.1);
+        this.jar.set
         
 
         // gauze set up
-        this.gauze1 = new Clickable(this, 244, 336, 'First Gauze');
-        this.gauze2 = new Clickable(this, 550, 300, 'Second Gauze');
-        this.gauze3 = new Clickable(this, 550, 300, 'Third Gauze');
-        this.gauze4 = new Clickable(this, 550, 300, 'Fourth Gauze');
-        this.gauze5 = new Clickable(this, 550, 300, 'Fifth Gauze');
+        this.gauze1 = new Gauze(this, 420, 365, 'First Gauze');
+        this.gauze2 = new Gauze(this, 430, 360, 'Second Gauze');
+        this.gauze3 = new Gauze(this, 440, 355, 'Third Gauze');
+        this.gauze4 = new Gauze(this, 450, 357, 'Fourth Gauze');
+        this.gauze5 = new Gauze(this, 460, 362, 'Fifth Gauze');
 
+        this.g1Button = new Clickable(this, game.config.width*.39, game.config.height*.70);
+        this.g2Button = new Clickable(this,game.config.width*.45, game.config.height*.68);
+        this.g3Button = new Clickable(this,game.config.width*.51, game.config.height*.66);
+        this.g4Button = new Clickable(this,game.config.width*.57, game.config.height*.68);
+        this.g5Button = new Clickable(this,game.config.width*.62, game.config.height*.72);
+ 
 
         // ⌨ set up
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
