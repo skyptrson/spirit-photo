@@ -17,9 +17,9 @@ class Ectoplasm extends Phaser.Scene{
         this.load.image("Fourth Jar", "./assetsEctoplasmFIXED/jar4.png");
         this.load.image("Fifth Jar", "./assetsEctoplasmFIXED/jar5.png");
         this.load.image("Hand", "./assetsEctoplasmFIXED/playerHand.png");
-        this.load.image("UniGhostLife", "./UniversialAssets/ghostLife.png")
-        this.load.image("UniTimerBar", "./UniversialAssets/timerBar.png")
-        this.load.image("UniTimerEmpty", "./UniversialAssets/timerEmpty.png")
+        this.load.image("UniGhostLife", "./UniversialAssets/ghostLife.png");
+        this.load.image("UniTimerBar", "./UniversialAssets/timerBar.png");
+        this.load.image("UniTimerEmpty", "./UniversialAssets/timerEmpty.png");
     }
 
     create(){
