@@ -61,7 +61,7 @@ class Photo extends Phaser.Scene{
         // photo taking check
         if(this.photoCorrect && this.clicked){
             this.add.text(game.config.width/2,game.config.height/2, "Succesful photo!", this.textConfig).setOrigin(0.5, 0.5);
-            this.time.delayedCall(4000, ()=>{
+            this.time.delayedCall(2000, ()=>{
                 this.scene.start('Develop');
             })
         }

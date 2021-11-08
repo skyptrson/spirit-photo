@@ -1,16 +1,17 @@
 class Clickable extends Phaser.GameObjects.Sprite{
-    constructor(scene, x, y, texture){
-        super(scene, x, y, texture);
+    constructor(scene, x, y, asset){
+        super(scene, x, y);
         this.setInteractive({
-            useHandCursor: true
+            // useHandCursor: true
         });
         scene.add.existing(this);
         this.on('pointerdown', function(pointer){
-            console.log("object clicked");
+            if(scene.jarClicked){
+            asset.visible = true;
+            console.log(`${scene.allPlaced}`);
+            scene.allPlaced++;
+            scene.jarClicked = false;
+            }
         });
     }
-    update(){
-        
-    }
-
 }

@@ -23,6 +23,7 @@ class Ectoplasm extends Phaser.Scene{
     }
 
     create(){
+        // this.input.setDefaultCursor('url(./assetsEctoplasmFIXED/playerHandtemp.png), pointer');
         // assistant face set up
         this.face = this.add.sprite(game.config.width/2, game.config.height/2, 'Assistant').setScale(.2);
         
@@ -31,11 +32,16 @@ class Ectoplasm extends Phaser.Scene{
             color: '#000000',
             backgroundColor: '#FFFFFF'
         };
-        this.add.text(20,20, "Click on the jar,\n then place each roll in the mouth.\n Press s to switch.", this.textConfig);
+        this.add.text(20,game.config.height-100, "Click on the jar to grab,\nthen click in the mouth\nto place the roll\n'S' to switch game.", this.textConfig);
         
         // 🥛 jar(s) set up
         this.jar = this.physics.add.sprite(game.config.width*.85, game.config.height*.75, 'Fifth Jar').setScale(.1);
-        this.jar.set
+        this.jar.body.setSize(700,1400);
+        this.jar.setInteractive();
+        this.jarClicked = false;
+        this.input.on('gameobjectdown', (pointer, gameObject, event) =>{
+            this.jarClicked = true;
+        });
         
 
         // gauze set up
@@ -45,33 +51,42 @@ class Ectoplasm extends Phaser.Scene{
         this.gauze4 = new Gauze(this, 450, 357, 'Fourth Gauze');
         this.gauze5 = new Gauze(this, 460, 362, 'Fifth Gauze');
 
-        this.g1Button = new Clickable(this, game.config.width*.39, game.config.height*.70);
-        this.g2Button = new Clickable(this,game.config.width*.45, game.config.height*.68);
-        this.g3Button = new Clickable(this,game.config.width*.51, game.config.height*.66);
-        this.g4Button = new Clickable(this,game.config.width*.57, game.config.height*.68);
-        this.g5Button = new Clickable(this,game.config.width*.62, game.config.height*.72);
+        this.g1Button = new Clickable(this, game.config.width*.39, game.config.height*.70, this.gauze1);
+        this.g2Button = new Clickable(this,game.config.width*.45, game.config.height*.68, this.gauze2);
+        this.g3Button = new Clickable(this,game.config.width*.51, game.config.height*.66, this.gauze3);
+        this.g4Button = new Clickable(this,game.config.width*.57, game.config.height*.68, this.gauze4);
+        this.g5Button = new Clickable(this,game.config.width*.62, game.config.height*.72, this.gauze5);
+
+        this.allPlaced = 0;
  
 
         // ⌨ set up
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 
-        // dont remember why this code is here, remove later
+        // testing code, comment out later
         this.input.on('gameobjectdown', (pointer, gameObject, event) =>{
             console.log(`${pointer.x}`, `${pointer.y}`);
         });
 
         // ⌚
-        // this.clock = this.time.delayedCall(10000, () =>{
-        //     //
-        //     console.log("Game over.");
-        //     // this.scene.start('Photo');
-        // })
+        this.clock = this.time.delayedCall(10000, () =>{
+            this.add.text(game.config.width/2,game.config.height/2, "Too slow!", this.textConfig).setOrigin(0.5, 0.5);
+            console.log("Game over.");
+            this.time.delayedCall(2000, ()=>{
+            this.scene.start('Photo');
+            });
+        });
     }
     update(){
         if(Phaser.Input.Keyboard.JustDown(keyS)){
             this.scene.start('Photo');
         }
-
-        this.gauze1.update();
+        if(this.allPlaced == 5){
+            this.add.text(game.config.width/2,game.config.height/2, "Success!", this.textConfig).setOrigin(0.5, 0.5);
+            this.clock.remove();
+            this.time.delayedCall(2000, ()=>{
+                this.scene.start('Develop');
+            })
+        }
     }
 }
