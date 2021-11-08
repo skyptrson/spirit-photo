@@ -32,9 +32,10 @@ class Ectoplasm extends Phaser.Scene{
         
         // 🥛 jar(s) set up
         this.jar = this.physics.add.sprite(game.config.width*.85, game.config.height*.75, 'Fifth Jar').setScale(.1);
+        
 
         // gauze set up
-        this.gauze1 = new Clickable(this, 550, 300, 'First Gauze');
+        this.gauze1 = new Clickable(this, 244, 336, 'First Gauze');
         this.gauze2 = new Clickable(this, 550, 300, 'Second Gauze');
         this.gauze3 = new Clickable(this, 550, 300, 'Third Gauze');
         this.gauze4 = new Clickable(this, 550, 300, 'Fourth Gauze');
@@ -45,16 +46,16 @@ class Ectoplasm extends Phaser.Scene{
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 
         // dont remember why this code is here, remove later
-        // this.input.on('gameobjectdown', (pointer, gameObject, event) =>{
-        //     this.clicked = true;
-        // });
+        this.input.on('gameobjectdown', (pointer, gameObject, event) =>{
+            console.log(`${pointer.x}`, `${pointer.y}`);
+        });
 
         // ⌚
-        this.clock = this.time.delayedCall(10000, () =>{
-            //
-            console.log("Game over.");
-            // this.scene.start('Photo');
-        })
+        // this.clock = this.time.delayedCall(10000, () =>{
+        //     //
+        //     console.log("Game over.");
+        //     // this.scene.start('Photo');
+        // })
     }
     update(){
         if(Phaser.Input.Keyboard.JustDown(keyS)){

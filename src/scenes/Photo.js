@@ -10,6 +10,7 @@ class Photo extends Phaser.Scene{
     }
 
     create(){
+        this.lives = 3;
         this.cameras.main.setBackgroundColor("#EEEEEE");
         this.textConfig = {
             color: '#000000',
@@ -51,12 +52,6 @@ class Photo extends Phaser.Scene{
             this.clicked = true;
         });
 
-        // ⌚
-        this.clock = this.time.delayedCall(10000, () =>{
-            //
-            console.log("Game over.");
-            this.scene.start('Develop');
-        })
 
     }
     update(){
@@ -69,6 +64,7 @@ class Photo extends Phaser.Scene{
         }
         else if(this.clicked){
             this.incorrect = this.add.text(game.config.width/2,game.config.height/2, "Bad photo.", this.textConfig).setOrigin(0.5, 0.5);
+            this.lives -=1;
             this.time.delayedCall(2000, ()=>{
                 this.incorrect.destroy();
             });
@@ -77,6 +73,12 @@ class Photo extends Phaser.Scene{
         // change scene
         if(Phaser.Input.Keyboard.JustDown(keyS)){
             this.scene.start('Develop');
+        }
+        if(this.lives == 0){
+            this.add.text(game.config.width/2,game.config.height/2, "Game over!.", this.textConfig).setOrigin(0.5, 0.5);
+            this.time.delayedCall(4000, ()=>{
+                this.scene.start('Develop');
+            })
         }
         // updates to keep scene running
         this.man.update();
